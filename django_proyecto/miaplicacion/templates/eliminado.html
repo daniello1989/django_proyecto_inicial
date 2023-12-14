@@ -1,0 +1,10 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+<div class="card-text alert alert-success" role="alert">
+    <h1>Has eliminado correctamente el poema</h1>
+    <a href="{% url 'poemas' %}" class="btn btn-light">Volver a los poemas</a>
+</div>
+
+{% endblock %}

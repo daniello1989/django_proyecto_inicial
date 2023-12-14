@@ -1,0 +1,88 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row  justify-content-center">
+        <div class="col-4">
+            <a class="nav-link active" aria-current="page" href="{% url 'poemas' %}">
+                <h4>Poemas populares</h4>
+            </a>
+        </div>
+        <div class="col-4">
+            <a class="nav-link active" aria-current="page" href="{% url 'proyectos' %}">
+                <h4>Poemas guardados</h4>
+            </a>
+        </div>
+        <div class="col-4">
+            <a class="nav-link active" aria-current="page" href="{% url 'autores' %}">
+                <h4>Mis poemas</h4>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-4 mb-4">
+        <h1>{{ titulo }}</h1>
+    </div>
+</div>
+<!--Recorro todos los poemas-->
+{# Recorro los poemas #}
+<div class="container">
+    <div class="row justify-content-center" style="display: flex;">
+        {% for p in poemas %}
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{p.titulo}}</h5>
+
+                    {% if p.leido == False %}
+                    <p class="card-text alert alert-warning" role="alert">
+                        No has leído el poema todavía 🕑
+                    </p>
+                    {% else %}
+                    <p class="card-text alert alert-success" role="alert">
+                        Ya has leído este poema ☑
+                    </p>
+                    {% endif %}
+                    <p class="card-text">{{p.contenido}}</p>
+                    <p class="card-text">{{p.descripcion}}</p>
+                    {% if p.megusta == 0 %}
+                    <p class="card-text">
+                    <h5>El poema no ha recibido ningún me gusta todavía</h5>
+                    </p>
+                    {% else %}
+                    <p class="card-text"> El poema ha recibido
+                    <h5>{{p.megusta}}</h5> me gusta</p>
+                    {% endif %}
+                    <a href="{% url 'poemas_libro' p.proyecto_id %}" class="btn btn-primary">Ir al libro</a>
+                    <a href="{% url 'eliminar_poema_porid' p.id %}" type="button" class="btn btn-primary"
+                        id="liveToastBtn">Eliminar</a>
+                    <button type="button" class="btn btn-primary" id="liveToastBtn">Marcar</button>
+
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <img src="..." class="rounded me-2" alt="...">
+                                <strong class="me-auto">Hace apenas un segundo...</strong>
+                                <small>11 mins ago</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                Has marcado el poema como leído.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,69 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <a class="nav-link active" aria-current="page" href="{% url 'poemas' %}">
+                <h4>Poemas populares</h4>
+            </a>
+        </div>
+        <div class="col-4">
+            <a class="nav-link active" aria-current="page" href="{% url 'proyectos' %}">
+                <h4>Poemas guardados</h4>
+            </a>
+        </div>
+        <div class="col-4">
+            <a class="nav-link active" aria-current="page" href="{% url 'autores' %}">
+                <h4>Mis poemas</h4>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-4">
+        <h1>{{ titulo }}</h1>
+    </div>
+</div>
+<!--Recorro todos los poemas-->
+{# Recorro los poemas #}
+<div class="container">
+    <div class="row justify-content-center" style="display: flex;">
+        {% for p in poemas %} 
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{p.titulo}}</h5>
+
+                    {% if p.leido == False %}
+                    <div class="alert alert-warning" role="alert">
+                        <p>No has leído el poema todavía 🕑</p>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success" role="alert">
+                        <p>Ya has leído este poema ☑</p>
+                    </div>
+                    {% endif %}
+
+                    <p class="card-text">{{p.contenido}}</p>
+                    <p class="card-text">{{p.descripcion}}</p>
+                    {% if p.megusta == 0 %}
+                    <p class="card-text">
+                    <h5>El poema no ha recibido ningún me gusta todavía</h5>
+                    </p>
+                    {% else %}
+                    <p class="card-text"> El poema ha recibido
+                    <h5>{{p.megusta}}</h5> me gusta</p>
+                    {% endif %}
+                    <button class="btn btn-primary">Eliminar</button>
+                    <button class="btn btn-primary">Marcar</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

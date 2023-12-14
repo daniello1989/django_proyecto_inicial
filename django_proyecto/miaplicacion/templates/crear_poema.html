@@ -1,0 +1,31 @@
+{% extends "layouts/user.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <!--<div class="col-md-4">
+            <img src="..." class="img-fluid rounded-start" alt="...">
+          </div>-->
+            <div class="col">
+                <div class="card-body" style="background: linear-gradient(to right, rgba( 173, 216, 230, 1), rgba(255, 250, 240, 1 ));">
+                    <h3 class="card-title">Escribe tu nuevo poema</h3>
+                    <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como
+                        introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
+                    <p class="card-text text-secondary">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ formulario.as_p }}
+
+                        <button class="btn btn-primary">Guardar</button>
+                    </form>
+                    </p>
+                    <p class="card-text"><small class="text-muted">Última actualización hace 3 minutos</small></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

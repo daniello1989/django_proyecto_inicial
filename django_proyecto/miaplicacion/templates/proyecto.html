@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+            <div class="col-4">
+                <a class="nav-link active" aria-current="page" href="{% url 'poemas' %}"><h4>Libros populares</h4></a>
+            </div>
+        <div class="col-4">
+            <a class="nav-link active" aria-current="page" href="{% url 'proyectos' %}"><h4>Libros guardados</h4></a>
+        </div>
+        <div class="col-4">
+          <a class="nav-link active" aria-current="page" href="{% url 'autores' %}"><h4>Mis libros</h4></a>
+        </div>
+    </div>
+</div>
+
+<!--Título de la página-->
+<div class="row justify-content-center">
+    <div class="col-4 mb-4">
+        <h1>{{ titulo }}</h1>
+    </div>
+</div>
+
+<!--Contenido de la página-->
+<div class="container">
+    <div class="row mb-4 justify-content-center">
+    {% for p in proyectos %}
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{p.nombre}}</h5>
+                    <p class="card-text">{{p.descripcion}}</p>
+                    <a href="{% url 'poemas_libro' p.id %}" class="btn btn-primary">Ver los poemas</a>
+                    <a class="btn btn-primary" href="{% url 'proyecto_autor' p.autor_id %}">Los libros del autor</a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

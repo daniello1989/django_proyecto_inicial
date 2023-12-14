@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lan="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block tittle %} Django App{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <!-- Script para mostrar el toast -->
+  <script>
+    var toastTrigger = document.getElementById('liveToastBtn');
+    var toastLiveExample = document.getElementById('liveToast');
+
+    if (toastTrigger) {
+      toastTrigger.addEventListener('click', function () {
+        var toast = new bootstrap.Toast(toastLiveExample);
+        toast.show();
+      });
+    }
+  </script>
+
+  <title>POEMAR.io</title>
+  <!--<link rel="stylesheet" href="{% static 'styles/main.css'%}">-->
+</head>
+
+<body>
+  <nav class="navbar navbar-light" style="background: linear-gradient(to right, rgba( 173, 216, 230, 1), rgba(255, 250, 240, 1 ));">
+    <div class="container">
+      <ul class="nav justify-content-end" color=$gray-200>
+        <li class="nav-item">
+          <a class="navbar-brand" style="color: #4B49AD; font-size:xx-large; font:bold;">POEMAR.io</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'proyectos' %}">Proyectos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'poemas' %}">Poema</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'autores' %}">Autores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'sobre_nosotros' %}">Sobre nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'vista_usuario' %}">🧍</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'crear_autor' %}">Crear usuario</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container border-bottom">
+    <div class="row row mb-2 mt-2 justify-content-center">
+      <div class="col-4">
+        <a class="nav-link active" aria-current="page" href="{% url 'poemas' %}" onclick="changeColor(this)">
+          <h2>POEMAS</h2>
+        </a>
+      </div>
+      <div class="col-4">
+        <a class="nav-link active" aria-current="page" href="{% url 'proyectos' %}" onclick="changeColor(this)">
+          <h2>LIBROS</h2>
+        </a>
+      </div>
+      <div class="col-4">
+        <a class="nav-link active" aria-current="page" href="{% url 'autores' %}" onclick="changeColor(this)">
+          <h2>AUTORES</h2>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function changeColor(element) {
+        // Obtener todos los elementos con la clase 'nav-link'
+        var navLinks = document.querySelectorAll('.nav-link');
+
+        // Restablecer el color de fondo y texto para todos los elementos
+        navLinks.forEach(function (navLink) {
+          navLink.style.backgroundColor = '';
+          navLink.style.color = '';
+        });
+
+        // Cambiar el color de fondo y texto para el elemento clicado
+        element.style.backgroundColor = '#e0e0e0'; // gris claro
+        element.style.color = '#333'; // gris oscuro
+      }
+    });
+  </script>
+
+
+  {% block content%} {% endblock %}
+
+  <footer class="footer" style="background: linear-gradient(to right, rgba( 173, 216, 230, 1), rgba(255, 250, 240, 1 ));">
+    <div class="container">
+      <div class="row mt-4">
+        <div class="col-lg-4">
+          <h3 style="color: #4B49AD;">Enlaces</h3>
+          <ul>
+            <li><a href="#">Volver arriba</a></li>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'sobre_nosotros' %}">Sobre nosotros</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 align-items-center">
+          <h3 style="color: #4B49AD;">POEMAR.io</h3>
+        </div>
+        <div class="col-lg-4">
+          <h3 style="color: #4B49AD;">Derechos de autor</h3>
+          <p>(c) 2023 Mi Sitio Web. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+
+  </div>
+</body>
+
+</html>
